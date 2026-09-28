@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contact the NovelCrush website team.">
+  <title>Contact — NovelCrush</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="contact-page">
+  <header>
+    <div class="container navbar">
+      <a class="brand" href="index.html">Novel<span>Crush</span></a>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="novel.html">Library</a>
+        <a href="about.html">About</a>
+        <a href="contact.html"
+        class="active"
+        aria-current="page">Contact</a>
+        
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="page-content">
+      <div class="eyebrow">Get in touch</div>
+      <h1>Contact us.</h1>
+      <p>
+        Have a question or suggestion? Send us a message using the form below.
+      </p>
+
+      <form class="contact-form" id="contactForm">
+  <label for="name">
+    Your name
+    <input id="name" name="name" type="text" required>
+  </label>
+
+  <label for="email">
+    Your email address
+    <input id="email" name="email" type="email" required>
+  </label>
+
+  <label for="message">
+    Message
+    <textarea id="message" name="message" required></textarea>
+  </label>
+
+  <button class="button" type="submit">Send message</button>
+</form>
+
+<script>
+  document.getElementById("contactForm").addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const visitorEmail = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    const subject = encodeURIComponent("Message from the NovelCrush website");
+    const body = encodeURIComponent(
+      `Name: ${name}\nVisitor email: ${visitorEmail}\n\nMessage:\n${message}`
+    );
+
+    window.location.href =
+      `mailto:nancycharles2k5@gmail.com?subject=${subject}&body=${body}`;
+  });
+</script>
+    </article>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span>© 2026 NovelCrush. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="novel.html">Library</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer> 
+</body>
+</html>

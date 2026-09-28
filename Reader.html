@@ -1,0 +1,105 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+  <title>Read Online | NovelCrush</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Load JSZip before EPUB.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/epubjs@0.3.93/dist/epub.min.js"></script>
+</head>
+
+<body>
+
+  <main class="reader-page">
+
+    <a href="novel.html">← Back to Library</a>
+
+    <h1 id="book-title">NovelCrush Reader</h1>
+
+    <div class="reader-controls">
+      <button id="smaller">A-</button>
+      <button id="larger">A+</button>
+    </div>
+
+    <p id="status">Loading your book...</p>
+
+    <div id="viewer"></div>
+
+    <div class="reader-controls">
+      <button id="previous">← Previous</button>
+      <button id="next">Next →</button>
+    </div>
+
+  </main>
+
+  <script>
+    const params = new URLSearchParams(
+      window.location.search
+    );
+
+    const filename = params.get("book");
+
+    // Only allow EPUB filenames from our books folder.
+    const validFilename =
+      /^[a-zA-Z0-9_-]+\.epub$/.test(filename || "");
+
+    if (!validFilename) {
+      document.getElementById("status").textContent =
+        "No valid book selected.";
+    } else {
+      const book = ePub("books/" + filename);
+
+      const rendition = book.renderTo("viewer", {
+        width: "100%",
+        height: "100%",
+        spread: "none",
+        flow: "paginated"
+      });
+
+      book.loaded.metadata.then(metadata => {
+        document.getElementById("book-title")
+          .textContent = metadata.title;
+      });
+
+      rendition.display().then(() => {
+        document.getElementById("status")
+          .textContent = "";
+      }).catch(() => {
+        document.getElementById("status")
+          .textContent = "Unable to open this book.";
+      });
+
+      document.getElementById("next")
+        .addEventListener("click", () => {
+          rendition.next();
+        });
+
+      document.getElementById("previous")
+        .addEventListener("click", () => {
+          rendition.prev();
+        });
+
+      let fontSize = 100;
+
+      document.getElementById("larger")
+        .addEventListener("click", () => {
+          fontSize += 10;
+          rendition.themes.fontSize(fontSize + "%");
+        });
+
+      document.getElementById("smaller")
+        .addEventListener("click", () => {
+          fontSize = Math.max(70, fontSize - 10);
+          rendition.themes.fontSize(fontSize + "%");
+        });
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,128 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Book Details | NovelCrush</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <main class="book-details">
+
+        <a href="novel.html" class="back-link">
+            ← Back to Library
+        </a>
+
+        <div id="book-content" class="details-layout">
+
+            <img id="book-cover"
+                 src=""
+                 alt="Book cover">
+
+            <div class="details-info">
+
+                <span id="book-genre"></span>
+
+                <h1 id="book-title"></h1>
+
+                <p id="book-author"></p>
+
+                <h2>About This Book</h2>
+
+                <p id="book-description"></p>
+
+                <div class="details-buttons">
+                    <a id="read-button"
+                       href="#">
+                        Read Online
+                    </a>
+
+                    <a id="download-button"
+                       href="#"
+                       download>
+                        Download EPUB
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <p id="book-error" hidden>
+            Sorry, this book could not be found.
+            <a href="novel.html">
+                Browse our library
+            </a>
+        </p>
+
+    </main>
+
+    <script src="books.js"></script>
+
+    <script>
+        const params = new URLSearchParams(
+            window.location.search
+        );
+
+        const bookId = params.get("id");
+
+        const selectedBook = Object.hasOwn(
+            books, bookId || ""
+        ) ? books[bookId] : null;
+
+        if (selectedBook) {
+
+            document.getElementById("book-title")
+                .textContent = selectedBook.title;
+
+            document.getElementById("book-author")
+                .textContent =
+                "By " + selectedBook.author;
+
+            document.getElementById("book-genre")
+                .textContent = selectedBook.genre;
+
+            document.getElementById("book-description")
+                .textContent = selectedBook.description;
+
+            const cover = document.getElementById(
+                "book-cover"
+            );
+
+            cover.src = selectedBook.cover;
+            cover.alt = selectedBook.title + " cover";
+
+            // Our existing reader expects only the
+            // EPUB filename, not the folder path.
+            const filename = selectedBook.file.split("/")
+                .pop();
+
+            document.getElementById("read-button")
+                .href = "reader.html?book=" +
+                encodeURIComponent(filename);
+
+            document.getElementById("download-button")
+                .href = selectedBook.file;
+
+            document.title =
+                selectedBook.title + " | NovelCrush";
+
+        } else {
+
+            document.getElementById("book-content")
+                .hidden = true;
+
+            document.getElementById("book-error")
+                .hidden = false;
+
+        }
+    </script>
+
+</body>
+</html>

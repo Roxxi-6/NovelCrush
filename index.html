@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover stories and novels to read online.">
+  <title>NovelCrush — Discover Your Next Read</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <header>
+    <div class="container navbar">
+
+        <a class="brand" href="index.html">
+            Novel<span>Crush</span>
+        </a>
+
+        <nav aria-label="Main navigation">
+            <a class="active" href="index.html">Home</a>
+            <a href="novel.html">Library</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+    </div>
+</header>
+
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="eyebrow">Stories worth staying up for</div>
+      <h1>Find your next favorite story.</h1>
+      <p>Explore memorable novels, meet fascinating characters, and settle into a story you won’t want to put down.</p>
+
+      
+<form action="novel.html" method="GET" class="search-form">
+    <input
+        type="search"
+        name="q"
+        placeholder="Search books or authors..."
+        aria-label="Search books"
+        required
+    >
+
+    <button type="submit">
+        Search
+    </button>
+</form>
+    </div>
+  </section>
+
+  <main class="container" id="novels">
+    <div class="section-heading">
+      <h2>Explore novels</h2>
+      <p>Choose a story and start reading.</p>
+    </div>
+
+      
+<div class="filters" aria-label="Browse books by genre">
+
+    <a href="novel.html" class="filter active">
+        All Stories
+    </a>
+
+    <a href="novel.html?genre=fantasy"
+       class="filter">
+        Fantasy
+    </a>
+
+    <a href="novel.html?genre=romance"
+       class="filter">
+        Romance
+    </a>
+
+    <a href="novel.html?genre=mystery"
+       class="filter">
+        Mystery
+    </a>
+
+    <a href="novel.html?genre=adventure"
+       class="filter">
+        Adventure
+    </a>
+
+</div>
+    </div>
+
+    <div class="novel-grid" id="novelGrid">
+      <article class="novel-card" data-genre="Romance" data-search="One summer in montmartre Teagan Kearney Romance">
+        <div class="cover cover-1">
+          <img src="images/One summer in montmartre.jpeg"
+          alt="One Summer In Montmartre"
+          >
+          One Summer<br>in Montmartre</div>
+        <div class="novel-info">
+          <div class="genre">Romance</div>
+          <h3>One Summer In Montmartre</h3>
+          <p class="author">by Teagan Kearney</p>
+          <p class="description">A dual-timeline romance where Anna discovers a love letter in present-day Paris, while in 1873, artist Luc Marteille becomes obsessed with his model Helene. Both must choose between safe and passionate love.</p>
+          <a class="read-link" href="book.html?id=one-summer-in-montmartre">View novel →</a>
+        </div>
+      </article>
+
+      <article class="novel-card" data-genre="Fiction" data-search="Monsters: Purity Steve Tumbull Fiction">
+        <div class="cover cover-2">
+          <img src="images/Monsters;Purity.jpeg"
+          alt="Monsters: Purity"
+          >
+          Monsters:Purity<br></div>
+        <div class="novel-info">
+          <div class="genre">Fiction</div>
+          <h3>Monsters:Purity</h3>
+          <p class="author">by Steve Tumbull</p>
+          <p class="description">The story of a teenage girl who's turning into a monster - literally. Whecn Chloe closest friend is kidnapped and the police seems powerless to help, she sets out to find her alone, but things are not what they seem.</p>
+          <a class="read-link" href="book.html?id=monsters-purity">View novel →</a>
+        </div>
+      </article>
+
+      <article class="novel-card" data-genre="mystery" data-search="the wrong note courtney mcfarlin mystery">
+        <div class="cover cover-3">
+          <img src="images/The wrong note.jpeg"
+          alt="The Wrong Note"
+          >
+          The Wrong Note<br></div>
+        <div class="novel-info">
+          <div class="genre">Mystery</div>
+          <h3>The Wrong Note</h3>
+          <p class="author">by Courtney Mcfarlin</p>
+          <p class="description">A siren who can't sing runs a cozy bar called The Sirens Song in the only town she's ever loved. Autumn's life has always been  comfortably predictable...until a handsome shifter who can't shift walks into her bar. </p>
+          <a class="read-link" href="book.html?id=the-wrong-note">View novel →</a>
+        </div>
+      </article>
+
+      <article class="novel-card" data-genre="adventure" data-search="Evelyn V.K Beta adventure">
+        <div class="cover cover-4">
+          <img src="images/Evelyn.jpeg"
+          alt="Evelyn"
+          >
+          Evelyn<br></div>
+        <div class="novel-info">
+          <div class="genre">Adventure</div>
+          <h3>Evelyn</h3>
+          <p class="author">V.K Beta</p>
+          <p class="description">Far fromhome,a stranded time traveler struggles to raise a young girl with mysterious powers. together, they find unexpected help from a group of misfit heros, and along the way Garan discovers morew about himself and what it means to belong.</p>
+          <a class="read-link" href="book.html?id=evelyn">View novel →</a>
+        </div>
+      </article>
+    </div>
+
+    <p class="empty-state" id="emptyState">No novels match your search. Try another title or genre.</p>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span>© 2026 NovelCrush. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="novel.html">Library</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer> 
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const cards = [...document.querySelectorAll(".novel-card")];
+    const filters = [...document.querySelectorAll(".filter")];
+    const emptyState = document.getElementById("emptyState");
+    let selectedGenre = "all";
+
+    function updateNovels() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      cards.forEach((card) => {
+        const matchesGenre =
+          selectedGenre === "all" || card.dataset.genre === selectedGenre;
+        const matchesSearch = card.dataset.search.includes(query);
+        const visible = matchesGenre && matchesSearch;
+
+        card.hidden = !visible;
+        if (visible) visibleCount++;
+      });
+
+      emptyState.style.display = visibleCount ? "none" : "block";
+    }
+
+    filters.forEach((button) => {
+      button.addEventListener("click", () => {
+        filters.forEach((filter) => filter.classList.remove("active"));
+        button.classList.add("active");
+        selectedGenre = button.dataset.genre;
+        updateNovels();
+      });
+    });
+
+    searchInput.addEventListener("input", updateNovels);
+
+    document.getElementById("searchForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      updateNovels();
+      document.getElementById("novels").scrollIntoView({ behavior: "smooth" });
+    });
+  </script>
+</body>
+</html>
